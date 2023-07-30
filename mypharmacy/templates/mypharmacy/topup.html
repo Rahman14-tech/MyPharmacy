@@ -1,0 +1,41 @@
+{% extends "mypharmacy/layout.html" %}
+{% load static %}
+{% block body %}
+<form action="{% url 'topup' %}"method="post">
+    {% csrf_token %}
+    <section id="konten" >
+      <div class="container-fluid p-5">
+        <div id="sub-konten" class="container-fluid">
+            <div class="row">
+              <div class="col-6 p-5 rounded-start">
+                <a class="ripple">
+                    <img
+                      alt="gambar"
+                      id="gambar_topup"
+                      class="img-fluid rounded"
+                      src="https://console.kr-asia.com/wp-content/uploads/2020/07/Indonesia_mobile_wallet.png"/>
+                  </a>
+              </div>
+              <div class="col rounded-end">
+                <div class="container">
+                    <h1 class="text-center mt-5">Top Up</h1>
+                    <div class="form-group mt-5">
+                      <input type="number"class="form-control"id="username_form_login"name="topup">
+                    </div>
+                    <div class="d-grid gap-2 col-4 mx-auto text-center">
+                      <button type="submit" class="btn btn-outline-danger btn-lg mt-3">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{error}}
+      </div>
+      {% endif %}
+</form>
+{% endblock %}

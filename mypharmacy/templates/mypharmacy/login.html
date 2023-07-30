@@ -1,0 +1,33 @@
+{% extends "mypharmacy/layout.html" %}
+{% load static %}
+{% block javascript %}
+{% endblock %}
+{% block body %}
+<div class="container"id="login_contain">
+        <div class="card-body">
+            <div class="row">
+                <div class="col"id="the_image_part_login">
+                  <img src="{% static 'mypharmacy/loginimage.svg' %}"id="login_image">
+                </div>
+                <div class="col"id="the_form_part_login">
+                  <h2>Login</h2><br>
+                  <form action="{% url 'loginplace' %}"method="post">
+                    {% csrf_token %}
+                    <h4>Email</h4>
+                    <input type="email"class="form-control"id="username_form_login"name="email"><br>
+                    <h4>Password</h4>
+                    <input type="password"class="form-control"id="password_form_login"name="password"><br><br>
+                    <button type="submit"id="login_button">Login</button>
+                  </form>
+                  <br>
+                  <span id="register_here">Doesn't have any acount yet?<a href="{% url 'register' %}"> Register here.</a></span>
+                  {% if error %}
+                  <div class="alert alert-danger" role="alert">
+                    {{error}}
+                  </div>
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

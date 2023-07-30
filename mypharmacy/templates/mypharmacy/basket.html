@@ -1,0 +1,62 @@
+{% extends "mypharmacy/layout.html" %}
+{% load static %}
+{% block javascript %}
+<script src="{% static 'mypharmacy/basket.js' %}"></script>
+{% endblock %}
+{% block body %}
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+  </div>
+{% endif %}
+{% if details %}
+    {% for detail in details%}
+        <div class="card-body buatbasket shadow p-3 mb-5 bg-body rounded" id="detailBarang{{detail.id}}">
+            <div class="row">
+                <div class="col">
+                    <img src="/media/{{detail.id_med.gambar_obat}}" class="card-img-top basketimage" alt="...">
+                </div>
+                <div class="col-6">
+                    <h3 class="card-title"id="title">{{detail.id_med.nama_obat}}</h3>
+                    <h5 id="qty"style="margin-bottom:1rem;">Kuantitas: {{detail.qty}}</h5>
+                    <h6 id="qty">Harga satuan: Rp. {{detail.id_med.harga_satuan}}</h6>
+                    <h6 id="diskon">Diskon: {{detail.diskon}}%</h6>
+                </div>
+                <div class="col">
+                    <h5 class="third" id="sub"style="margin-bottom:1rem;margin-top: 8rem;">subtotal: {{detail.subtotal}}</h5>
+                    <button class="btn btn-outline-danger deleting buttontrans"id="{{detail.id}}"value="{{detail.subtotal}}">Delete Item</button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div style="clear: both">
+    <h5 style="margin-left:85rem"style="display:inline-block;float: left;">Total: <span id="theTotal">{{barang.total_harga}}</span></h5>
+    </div>
+    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"style="margin-left:85rem">
+        Konfirmasi
+      </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Peringatan</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Apakah anda sudah yakin dengan pembelian anda?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+              <form action="{% url 'keranjang' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Iya</button>         
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <br><br>
+      <h1 style="text-align:center;">Tidak terdapat barang pada keranjang</h1>
+{% endif %}
+{% endblock %}

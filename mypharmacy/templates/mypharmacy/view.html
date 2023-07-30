@@ -1,0 +1,47 @@
+{% extends 'mypharmacy/layout.html' %}
+{% load static %}
+{% block javascript %}
+<script src="{% static 'mypharmacy/view.js' %}"></script>
+{% endblock %}
+{% block body %}
+<div class="container bagianview">
+    <div class="row">
+      <div class="col">
+        <img src="/media/{{Content.gambar_obat}}"alt="Content Image" id="view_image">
+      </div>
+      <div class="col"id="content_word">
+        <h2>{{Content.nama_obat}}</h2>
+        <h5 style="display:inline-block;">Stock:</h5>
+        <h5 id="the_stok" style="display:inline-block;">{{Content.stock}}</h5>
+        <h5>Jenis obat:
+          {% for category in Category %}
+        <span id="The_EXP">#<a href="/home?category={{category.id_cat.category}}">{{category.id_cat.category}}</a> </span>
+          {% endfor %}
+        </h5>
+        <h5>EXP:<span id="The_EXP">{{Content.exp}}</span></h5>
+        <h5>Deskripsi:</h5>
+        <p id="content_desc">{{Content.deskripsi}}</p>
+        <h5>Harga:<span id="The_satuan">{{Content.harga_satuan}}</span></h5>
+      <form action="{% url 'view' Content.id %}" method="post">
+        {% csrf_token %}
+        <div id="outer">
+          <button type="button" id="minus_barang">-</button>
+          <input type="text"id="input_barang_masuk"value="0"class="form-control"name="itemquantity">
+          <button type="button" id="plus_barang">+</button>
+        </div>
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+          {{error}}
+        </div>
+        {% endif %}
+        {% if success %}
+        <div class="alert alert-success" role="alert">
+          {{success}}
+        </div>
+        {% endif %}
+        <button type="submit"id="tambahker_button">Masukkan Keranjang</button>
+      </form>
+      </div>
+    </div>
+</div>
+{% endblock %}

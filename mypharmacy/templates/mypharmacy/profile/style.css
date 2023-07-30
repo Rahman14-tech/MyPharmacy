@@ -1,0 +1,40 @@
+.profile{
+    height: 8rem;
+    width: 8rem;
+    border-radius: 50%;
+    background: hsla(0, 0%, 20%, 1);
+    padding: 6px;
+    margin-left: 115px;
+    margin-top: 1rem;
+}
+
+.bi{
+    fill: hsla(0, 0%, 50%, 1);
+    /* width: 80%; */
+}
+
+.offcanvas {
+    background: rgb(56, 121, 67);
+}
+.tombol {
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+}
+
+.fas{
+    margin-top:6rem;
+}
+
+.posisi{
+    margin: 2px 0px 0px 20px ;
+    justify-content: flex-start;
+}
+
+.divider{
+    width: 30rem;
+    height: 2px;
+    background-color:rgb(155, 148, 148); 
+    display:inline-block;
+    /* box-shadow: 5px 5px 5px; */
+}

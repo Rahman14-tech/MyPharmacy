@@ -1,0 +1,24 @@
+{% extends "mypharmacy/layout.html" %}
+{% load static %}
+{% block javascript %}
+{% endblock %}
+{% block body %}
+<div class="container"id="login_contain">
+        <div class="card-body">
+            <div class="row">
+                <div class="col"id="the_image_part_login">
+                  <img src="{% static 'mypharmacy/error.svg' %}"id="login_image">
+                </div>
+                <div class="col"id="error_text">
+                    <h2>Error</h2><br>
+                    <h4>{{error}}</h4>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'home' %}"><span>click here to proceed.</span></a>
+                    {% else %}
+                    <span>Back to <a href="{% url 'loginplace' %}">login page</a></span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}
